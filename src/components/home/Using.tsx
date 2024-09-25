@@ -35,7 +35,7 @@ export default function Using() {
             </div>
             <div className="flex-1">
               <Image
-                src="/placeholder.svg"
+                src="/dashboardjpg.jpg"
                 alt="Job Buddy Document Management"
                 width={500}
                 height={300}
@@ -59,7 +59,7 @@ export default function Using() {
             </div>
             <div className="flex-1">
               <Image
-                src="/placeholder.svg"
+                src="/dashboardjpg.jpg"
                 alt="Job Buddy Document Management"
                 width={500}
                 height={300}
@@ -83,7 +83,7 @@ export default function Using() {
             </div>
             <div className="flex-1">
               <Image
-                src="/placeholder.svg"
+                src="/dashboardjpg.jpg"
                 alt="Job Buddy Document Management"
                 width={500}
                 height={300}

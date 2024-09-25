@@ -1,5 +1,4 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -19,19 +18,22 @@ export default function Hero() {
               Your Career, Elevated
             </h1>
             <p className="mx-auto max-w-[700px] text-gray-600 md:text-xl">
-              Job Buddy: Your career companion. Navigate your
-              professional journey with confidence.
+              Job Buddy: Your career companion. Navigate your professional
+              journey with confidence.
             </p>
           </div>
           <div className="w-full max-w-sm space-y-2 flex flex-col items-center justify-center">
             <button className="p-[3px] relative">
               <div className="absolute inset-0 bg-gradient-to-r from-teal-700 to-blue-400 rounded-lg" />
               <div className="px-8 py-2  bg-black rounded-[6px]  relative group transition duration-200 text-white hover:bg-transparent">
-                Get Started <span>{'>'}</span>
+                <Link href={'/dashboard'}>
+                  Get Started <span>{">"}</span>
+                </Link>
               </div>
             </button>
             <p className="text-gray-900">
-              Manage your job applications with ease for <span className="font-bold underline"> FREE </span>
+              Manage your job applications with ease for{" "}
+              <span className="font-bold underline"> FREE </span>
             </p>
           </div>
         </div>
