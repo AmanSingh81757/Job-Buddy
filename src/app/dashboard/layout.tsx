@@ -1,16 +1,68 @@
-// import SideNav from '@/app/ui/dashboard/sidenav';
-// import SideNav from "@/components/dashboard/Sidenav";
-// import Header from "@/components/home/Header";
-// import Footer from "@/components/home/Footer";
+'use client'
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { useState } from 'react'
+import { Button } from "@/components/ui/button"
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { ChevronRight, Menu} from 'lucide-react'
+import Sidebar from '@/components/dashboard/sidebar'
+
+
+export default function DashboardClient({ children }: { children: React.ReactNode }) {
+  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const pathname = usePathname()
+
   return (
-    <>
-        {/* <Header /> */}
-        <div className="flex h-full flex-col md:overflow-hidden justify-start w-full p-5">
-            {/* <SideNav /> */}
-            {children}
-        </div>
-    </>
-  );
+    <div className="flex h-screen overflow-hidden">
+      <aside className="hidden w-64 border-r bg-gray-100/40 dark:bg-gray-800/40 md:block">
+        <Sidebar />
+      </aside>
+      <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>
+        <SheetContent side="left" className="w-64 p-0">
+          <Sidebar />
+        </SheetContent>
+      </Sheet>
+      <div className="flex flex-1 flex-col overflow-hidden">
+        <header className="flex  h-[60px] items-center gap-4 border-b bg-gray-100/40 px-4 dark:bg-gray-800/40 lg:h-[60px] lg:px-6">
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="md:hidden"
+                onClick={() => setSidebarOpen(true)}
+              >
+                <Menu className="h-6 w-6" />
+                <span className="sr-only">Toggle sidebar</span>
+              </Button>
+            </SheetTrigger>
+          </Sheet>
+          <div className="flex items-center gap-2 text-sm">
+            <Link href="/dashboard" className="font-medium">
+              Dashboard
+            </Link>
+            {pathname
+              .split('/')
+              .filter(Boolean)
+              .slice(1)
+              .map((segment, index, array) => (
+                <div key={segment} className="flex items-center gap-2">
+                  <ChevronRight className="h-4 w-4" />
+                  <Link
+                    href={`/dashboard/${array.slice(0, index + 1).join('/')}`}
+                    className={
+                      index === array.length - 1 ? 'font-medium' : undefined
+                    }
+                  >
+                    {segment.charAt(0).toUpperCase() + segment.slice(1)}
+                  </Link>
+                </div>
+              ))}
+          </div>
+        </header>
+        <main className="flex-1 overflow-y-auto p-4 md:p-6">{children}</main>
+      </div>
+    </div>
+  )
 }
