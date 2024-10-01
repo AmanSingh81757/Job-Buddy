@@ -1,6 +1,13 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Briefcase, MessageCircle, FileText, HelpCircle, FolderOpen, PlusCircle } from "lucide-react";
+import {
+  Briefcase,
+  MessageCircle,
+  FileText,
+  HelpCircle,
+  FolderOpen,
+  PlusCircle,
+} from "lucide-react";
 
 const sidebarItems = [
   { name: "Applications", href: "/dashboard/applications", icon: Briefcase },
@@ -14,8 +21,11 @@ export default function Sidebar() {
 
   return (
     <div className="flex h-full flex-col gap-2">
-      <div className="flex h-[60px] items-center border-b px-6">
-        <Link className="flex items-center gap-2 font-semibold" href="/">
+      <div className="flex items-center border-b px-6 py-3 justify-between w-full">
+        <Link
+          className="flex items-center w-fit mx-auto gap-2 font-semibold"
+          href="/"
+        >
           <Briefcase className="h-6 w-6" />
           <span>Job Buddy</span>
         </Link>
@@ -37,17 +47,23 @@ export default function Sidebar() {
             </Link>
           ))}
         </div>
-        <div className="flex items-center space-x-4 p-2">
-          <div className="h-12 w-12 rounded-full bg-slate-400" >Image Here</div>
+        <div className="flex items-center cursor-pointer hover:bg-slate-50 space-x-4 px-2 py-1">
+          <div className="h-10 w-10 rounded-full bg-slate-100 text-black text-2xl text-center items-center pt-1">
+            A
+          </div>
           <div className="space-y-2">
-            <div className="h-4 w-[150px] bg-slate-400" >Name Here</div>
+            <div className="h-8 w-[150px] text-center pt-1">Aman Singh</div>
           </div>
         </div>
-          </div>
-          <div className="flex items-center justify-around">
-              <span className="flex gap-2">Help <HelpCircle className="h-6 w-6" /></span>
-              <span className="flex gap-2">Feedback <MessageCircle className="h-6 w-6" /></span>
-          </div>
+      </div>
+      <div className="flex items-center justify-around my-2 text-sm">
+        <span className="flex gap-2">
+          Help <HelpCircle className="h-4 w-4" />
+        </span>
+        <span className="flex gap-2">
+          Feedback <MessageCircle className="h-4 w-4" />
+        </span>
+      </div>
     </div>
   );
 }

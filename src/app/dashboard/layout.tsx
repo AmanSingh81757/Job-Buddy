@@ -24,7 +24,7 @@ export default function DashboardClient({ children }: { children: React.ReactNod
         </SheetContent>
       </Sheet>
       <div className="flex flex-1 flex-col overflow-hidden">
-        <header className="flex  h-[60px] items-center gap-4 border-b bg-gray-100/40 px-4 dark:bg-gray-800/40 lg:h-[60px] lg:px-6">
+        <header className="flex py-3.5 items-center gap-4 border-y bg-blue-300/10 px-4 dark:bg-gray-800/40 lg:px-6">
           <Sheet>
             <SheetTrigger asChild>
               <Button
@@ -61,7 +61,7 @@ export default function DashboardClient({ children }: { children: React.ReactNod
               ))}
           </div>
         </header>
-        <main className="flex-1 overflow-y-auto p-4 md:p-6">{children}</main>
+        <main className="flex-1 p-4 md:p-6 bg-indigo-50">{children}</main>
       </div>
     </div>
   )
