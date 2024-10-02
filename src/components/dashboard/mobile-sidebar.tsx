@@ -1,9 +1,5 @@
 "use client";
-
 import { Menu } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Sheet,
   SheetClose,
@@ -20,7 +16,7 @@ export function MobileSidebar() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Menu className="h-6 w-6" />
+        <Menu className="h-6 w-6 md:hidden" />
       </SheetTrigger>
       <SheetContent side={"left"} className="px-1">
         <Sidebar />
