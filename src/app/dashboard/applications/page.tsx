@@ -153,9 +153,12 @@ export default function Applications() {
               <CardHeader className="flex flex-row justify-between">
                 <div className="flex flex-col gap-2">
                   <CardTitle className="text-gray-800">
-                    <Link className={"flex flex-row gap-3"} href={app.jobLink}>
+                    <Link
+                      className={"flex flex-row group hover:underline"}
+                      href={app.jobLink}
+                    >
                       {app.companyName}{" "}
-                      <SquareArrowOutUpRight className="size-4" />
+                      <SquareArrowOutUpRight className="ml-1 size-4 hidden group-hover:block" />
                     </Link>
                   </CardTitle>
                   <CardDescription className="text-teal-600">
