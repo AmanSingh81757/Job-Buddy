@@ -64,8 +64,20 @@ const config: Config = {
       animation: {
         blob: "blob 8s infinite",
         shimmer: "shimmer 2s linear infinite",
+        float: "float 6s cubic-bezier(0.4, 0, 0.6, 1) infinite",
       },
       keyframes: {
+        float: {
+          "0%": {
+            transform: "translateY(0px)",
+          },
+          "50%": {
+            transform: "translateY(-10px)",
+          },
+          "100%": {
+            transform: "translateY(0px)",
+          },
+        },
         blob: {
           "0%": {
             transform: "scale(1)",
@@ -85,11 +97,11 @@ const config: Config = {
         },
         shimmer: {
           from: {
-            "backgroundPosition": "0 0"
+            backgroundPosition: "0 0",
           },
           to: {
-            "backgroundPosition": "-200% 0"
-          }
+            backgroundPosition: "-200% 0",
+          },
         },
       },
     },
