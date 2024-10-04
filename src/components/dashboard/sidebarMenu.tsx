@@ -17,11 +17,7 @@ const sidebarItems = [
   { name: "Jobs", href: "/dashboard/jobs", icon: FileText },
 ];
 
-export default function SidebarMenu({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function SidebarMenu() {
   const pathname = usePathname();
   return (
     <div className="flex flex-col h-full justify-between">
@@ -41,7 +37,6 @@ export default function SidebarMenu({
           </Link>
         ))}
       </div>
-      {children}
     </div>
   );
 }
