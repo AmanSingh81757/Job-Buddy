@@ -1,9 +1,83 @@
 {
-  "id": "a1a7cfb4-efe9-4894-a442-0fa9ac4230c4",
-  "prevId": "16e3306a-107e-4ea6-8409-53d6ce80d8f2",
+  "id": "44e0b069-b6d5-43be-89a8-a31cf1523efa",
+  "prevId": "089c359a-3038-4d7c-b1bd-7689d1557b5e",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
+    "public.applications_table": {
+      "name": "applications_table",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "user_email": {
+          "name": "user_email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "company_name": {
+          "name": "company_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "role": {
+          "name": "role",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "job_link": {
+          "name": "job_link",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "salary": {
+          "name": "salary",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "location": {
+          "name": "location",
+          "type": "locationEnum",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "category": {
+          "name": "category",
+          "type": "categoryEnum",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "status": {
+          "name": "status",
+          "type": "statusEnum",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "applied_date": {
+          "name": "applied_date",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
     "public.posts_table": {
       "name": "posts_table",
       "schema": "",
@@ -102,7 +176,37 @@
       }
     }
   },
-  "enums": {},
+  "enums": {
+    "public.categoryEnum": {
+      "name": "categoryEnum",
+      "schema": "public",
+      "values": [
+        "Applied",
+        "Bookmarked",
+        "Interview",
+        "Selected"
+      ]
+    },
+    "public.locationEnum": {
+      "name": "locationEnum",
+      "schema": "public",
+      "values": [
+        "Onsite",
+        "Remote"
+      ]
+    },
+    "public.statusEnum": {
+      "name": "statusEnum",
+      "schema": "public",
+      "values": [
+        "Applied",
+        "Shortlisted",
+        "Interview",
+        "Rejected",
+        "Offered"
+      ]
+    }
+  },
   "schemas": {},
   "sequences": {},
   "_meta": {

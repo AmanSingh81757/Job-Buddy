@@ -1,8 +1,7 @@
-"use client";
-import { useSession, signOut } from "next-auth/react";
+import { auth } from "@/../auth";
 
-export default function ProfileCard() {
-  const { data: session } = useSession();
+export default async function ProfileCard() {
+  const session = await auth();
   return (
     <div className="flex items-center cursor-pointer space-x-4 px-2 py-1">
       <div className="h-10 w-10 text-black text-2xl justify-center items-center">
