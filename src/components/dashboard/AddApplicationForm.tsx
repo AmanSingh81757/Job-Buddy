@@ -1,6 +1,7 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
+import { useState } from "react"
 import { z } from "zod";
 import { Button } from "@/components/ui/button"
 import {
@@ -26,7 +27,7 @@ import { AddApplicationFormSchema, AddApplicationFormType } from "@/types/applic
 
 export function AddApplicationForm() {
   const { data: session } = useSession();
-
+  const [pending, setPending] = useState(false);
   const form = useForm<AddApplicationFormType>({
     resolver: zodResolver(AddApplicationFormSchema),
     defaultValues: {
@@ -37,9 +38,12 @@ export function AddApplicationForm() {
     },
   })
 
-  function onSubmit(values: AddApplicationFormType) {
-    console.log(session);
-    addApplicationUseCase(values, session?.user?.email);
+  async function onSubmit(values: AddApplicationFormType) {
+    setPending(true);
+    await addApplicationUseCase(values, session?.user?.email);
+    form.reset();
+    setPending(false);
+    window.location.reload();
   }
 
   return (
@@ -160,7 +164,7 @@ export function AddApplicationForm() {
                 </Select>
               </FormItem>
             )} />
-        <Button type="submit">Submit</Button>
+        <Button type="submit" disabled={pending}>Submit</Button>
       </form>
     </Form>
   )
