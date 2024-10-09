@@ -1,13 +1,13 @@
 import { z } from "zod";
 
 export const applicationSchema = z.object({
-  id: z.string(),
+  id: z.number(),
   jobLink: z.string().url(),
   role: z.string(),
   companyName: z.string(),
   salary: z.string(),
   location: z.enum(["Remote", "Onsite"]),
-  category: z.enum(["applied", "bookmarked", "interview", "selected"]),
+  category: z.enum(["Applied", "Bookmarked", "Interview", "Selected"]),
   status: z.enum([
     "Applied",
     "Interview",
@@ -15,7 +15,7 @@ export const applicationSchema = z.object({
     "Offered",
     "Rejected",
   ]),
-  appliedDate: z.string().optional(),
+  appliedDate: z.date().optional(),
 });
 
 export const AddApplicationFormSchema = z.object({
