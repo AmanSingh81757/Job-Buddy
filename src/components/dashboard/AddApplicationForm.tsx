@@ -24,8 +24,10 @@ import { addApplicationUseCase } from "@/use-cases/ApplicationUseCases";
 import { useSession } from "next-auth/react"
 import { AddApplicationFormSchema, AddApplicationFormType } from "@/types/applicationType";
 import { Loader } from "lucide-react";
+import { useToast } from "../hooks/use-toast";
 
-export function AddApplicationForm() {
+export function AddApplicationForm({ onClose }: { onClose: () => void }) {
+  const { toast } = useToast()
   const { data: session } = useSession();
   const [pending, setPending] = useState(false);
   const form = useForm<AddApplicationFormType>({
@@ -42,7 +44,12 @@ export function AddApplicationForm() {
     setPending(true);
     await addApplicationUseCase(values, session?.user?.email);
     form.reset();
-    window.location.reload();
+    toast({
+      variant: "success",
+      title: "Application added successfully",
+      description: `Application for ${values.companyName} has been added`,
+    })
+    onClose();
   }
 
   return (
