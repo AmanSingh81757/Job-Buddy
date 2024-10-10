@@ -2,7 +2,6 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { useState } from "react"
-import { z } from "zod";
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -21,9 +20,10 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Input } from "@/components/ui/input"
-import { addApplicationUseCase } from "@/use-cases/addApplicationUseCase";
+import { addApplicationUseCase } from "@/use-cases/ApplicationUseCases";
 import { useSession } from "next-auth/react"
 import { AddApplicationFormSchema, AddApplicationFormType } from "@/types/applicationType";
+import { Loader } from "lucide-react";
 
 export function AddApplicationForm() {
   const { data: session } = useSession();
@@ -42,7 +42,6 @@ export function AddApplicationForm() {
     setPending(true);
     await addApplicationUseCase(values, session?.user?.email);
     form.reset();
-    setPending(false);
     window.location.reload();
   }
 
@@ -164,7 +163,7 @@ export function AddApplicationForm() {
                 </Select>
               </FormItem>
             )} />
-        <Button type="submit" disabled={pending}>Submit</Button>
+        <Button type="submit" disabled={pending}>{pending && <Loader className="size-4" />}Submit{ pending && "ting"}</Button>
       </form>
     </Form>
   )

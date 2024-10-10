@@ -1,12 +1,12 @@
 import AddApplicationDialog from "@/components/dashboard/AddApplicationDialog";
 import Applications from "@/components/dashboard/Applications";
 import { auth } from "@/../auth";
-import { getUserApplicationsByEmail } from "@/db/queries/applications";
 import { Suspense } from "react";
+import { getUserApplicationsByEmailUseCase } from "@/use-cases/ApplicationUseCases";
 
 export default async function ApplicationsPage() {
   const session = await auth();
-  const applications = await getUserApplicationsByEmail(session?.user?.email as string);
+  const applications = await getUserApplicationsByEmailUseCase(session?.user?.email as string);
   return (
     <div className="container mx-auto p-4 min-h-screen">
       <div className="flex flex-row justify-between mb-6 items-center">

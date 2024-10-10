@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Sidebar from "@/components/dashboard/sidebar";
 import DashboardHeader from "@/components/dashboard/dashboardHeader";
 import { SessionProvider } from "next-auth/react";
-import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Job Buddy Dashboard",
