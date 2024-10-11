@@ -2,7 +2,8 @@ import { integer, pgTable, serial, text, timestamp, pgEnum } from 'drizzle-orm/p
 
 export const usersTable = pgTable('users_table', {
   id: serial('id').primaryKey(),
-  name: text('name').notNull(),
+  userName: text('Username').notNull(),
+  lastSignIn: timestamp('last_sign_in').notNull().defaultNow(),
   email: text('email').notNull().unique(),
 });
 

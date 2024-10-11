@@ -25,7 +25,8 @@ CREATE TABLE IF NOT EXISTS "applications_table" (
 	"salary" text NOT NULL,
 	"location" "locationEnum" NOT NULL,
 	"category" "categoryEnum" NOT NULL,
-	"status" "statusEnum" NOT NULL
+	"status" "statusEnum" NOT NULL,
+	"applied_date" timestamp DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "posts_table" (
@@ -40,6 +41,7 @@ CREATE TABLE IF NOT EXISTS "posts_table" (
 CREATE TABLE IF NOT EXISTS "users_table" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"name" text NOT NULL,
+	"last_sign_in" timestamp DEFAULT now() NOT NULL,
 	"email" text NOT NULL,
 	CONSTRAINT "users_table_email_unique" UNIQUE("email")
 );

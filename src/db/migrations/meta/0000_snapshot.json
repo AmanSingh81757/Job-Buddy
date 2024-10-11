@@ -1,5 +1,5 @@
 {
-  "id": "089c359a-3038-4d7c-b1bd-7689d1557b5e",
+  "id": "a2a3b28a-a8ca-468c-85ff-74c0b2df0edf",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -64,6 +64,13 @@
           "typeSchema": "public",
           "primaryKey": false,
           "notNull": true
+        },
+        "applied_date": {
+          "name": "applied_date",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
         }
       },
       "indexes": {},
@@ -147,6 +154,13 @@
           "type": "text",
           "primaryKey": false,
           "notNull": true
+        },
+        "last_sign_in": {
+          "name": "last_sign_in",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
         },
         "email": {
           "name": "email",
