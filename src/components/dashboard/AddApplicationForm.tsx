@@ -1,8 +1,8 @@
 "use client";
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -11,23 +11,26 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
+} from "@/components/ui/form";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { Input } from "@/components/ui/input"
+} from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
 import { addApplicationUseCase } from "@/use-cases/ApplicationUseCases";
-import { useSession } from "next-auth/react"
-import { AddApplicationFormSchema, AddApplicationFormType } from "@/types/applicationType";
+import { useSession } from "next-auth/react";
+import {
+  AddApplicationFormSchema,
+  AddApplicationFormType,
+} from "@/types/applicationType";
 import { Loader } from "lucide-react";
 import { useToast } from "../hooks/use-toast";
 
 export function AddApplicationForm({ onClose }: { onClose: () => void }) {
-  const { toast } = useToast()
+  const { toast } = useToast();
   const { data: session } = useSession();
   const [pending, setPending] = useState(false);
   const form = useForm<AddApplicationFormType>({
@@ -38,7 +41,7 @@ export function AddApplicationForm({ onClose }: { onClose: () => void }) {
       jobLink: "",
       salary: "",
     },
-  })
+  });
 
   async function onSubmit(values: AddApplicationFormType) {
     setPending(true);
@@ -48,7 +51,7 @@ export function AddApplicationForm({ onClose }: { onClose: () => void }) {
       variant: "success",
       title: "Application added successfully",
       description: `Application for ${values.companyName} has been added`,
-    })
+    });
     onClose();
   }
 
@@ -116,7 +119,7 @@ export function AddApplicationForm({ onClose }: { onClose: () => void }) {
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select Location"/>
+                    <SelectValue placeholder="Select Location" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
@@ -125,53 +128,65 @@ export function AddApplicationForm({ onClose }: { onClose: () => void }) {
                 </SelectContent>
               </Select>
             </FormItem>
-          )} />
-          <FormField
-            control={form.control}
-            name="category"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Application Category</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select Category"/>
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="Applied">Applied</SelectItem>
-                    <SelectItem value="Bookmarked">Bookmarked</SelectItem>
-                    <SelectItem value="Interview">Interview</SelectItem>
-                    <SelectItem value="Selected">Selected</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormItem>
-          )} />
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="category"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Application Category</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select Category" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="Applied">Applied</SelectItem>
+                  <SelectItem value="Bookmarked">Bookmarked</SelectItem>
+                  <SelectItem value="Interview">Interview</SelectItem>
+                  <SelectItem value="Selected">Selected</SelectItem>
+                </SelectContent>
+              </Select>
+            </FormItem>
+          )}
+        />
 
         <FormField
-            control={form.control}
-            name="status"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Application Status</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select Status"/>
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="Applied">Applied</SelectItem>
-                    <SelectItem value="Interview">Interview</SelectItem>
-                    <SelectItem value="Shortlisted">Shortlisted</SelectItem>
-                    <SelectItem value="Offered">Offered</SelectItem>
-                    <SelectItem value="Rejected">Rejected</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormItem>
-            )} />
-        <Button type="submit" disabled={pending}>{pending && <Loader className="size-4" />}Submit{ pending && "ting"}</Button>
+          control={form.control}
+          name="status"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Application Status</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select Status" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="Applied">Applied</SelectItem>
+                  <SelectItem value="Interview">Interview</SelectItem>
+                  <SelectItem value="Shortlisted">Shortlisted</SelectItem>
+                  <SelectItem value="Offered">Offered</SelectItem>
+                  <SelectItem value="Rejected">Rejected</SelectItem>
+                </SelectContent>
+              </Select>
+            </FormItem>
+          )}
+        />
+        <div className="w-full grid grid-cols-2 grid-rows-1 gap-5 pt-5">
+          <Button variant={"outline"}>Cancel</Button>
+        <Button
+          className="bg-teal-600 text-white hover:bg-teal-700 px-4 py-2 rounded-md"
+          type="submit"
+          disabled={pending}
+        >
+          {pending && <Loader className="size-4" />}Submit{pending && "ting"}
+        </Button>
+        </div>
       </form>
     </Form>
-  )
+  );
 }

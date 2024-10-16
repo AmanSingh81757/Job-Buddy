@@ -22,25 +22,63 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { deleteApplicationUseCase } from "@/use-cases/ApplicationUseCases";
 import { useToast } from "../hooks/use-toast";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { buttonVariants } from "@/components/ui/button";
 
-function DeleteApplicationIcon({ application, text }: { application: ApplicationType, text?: string }) {
-  const { toast } = useToast()
-  "use client";
+function DeleteApplicationIcon({
+  application,
+  text,
+}: {
+  application: ApplicationType;
+  text?: string;
+}) {
+  const { toast } = useToast();
+  ("use client");
   async function onDeleteApplication(id: number) {
     await deleteApplicationUseCase(id);
     toast({
       variant: "success",
       title: "Application deleted successfully",
       description: `Application for ${application.companyName} has been deleted`,
-    })
+    });
   }
   return (
-  <span onClick={() => onDeleteApplication(application.id)} className="flex gap-2">
-    <TrashIcon
-      className="size-5 cursor-pointer text-red-600"
-    />
-    { text }
-  </span>
+    <AlertDialog>
+      <AlertDialogTrigger className="flex gap-2">
+          <TrashIcon className="size-5 cursor-pointer text-red-600" />
+          {text}
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>
+            Are you sure you want to DELETE this application?
+          </AlertDialogTitle>
+          <AlertDialogDescription>
+            This action cannot be undone. This will permanently delete this
+            application from our database
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction
+             className={buttonVariants({ variant: "destructive" })}
+            onClick={() => onDeleteApplication(application.id)}
+          >
+            DELETE
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 }
 
@@ -81,7 +119,10 @@ export function ApplicationCard({
                 Edit
               </DropdownMenuItem>
               <DropdownMenuItem className="gap-2">
-              <DeleteApplicationIcon application={application} text="Delete"/>
+                <DeleteApplicationIcon
+                  application={application}
+                  text="Delete"
+                />
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
