@@ -3,24 +3,23 @@
 import { AddApplicationFormType } from "@/types/applicationType";
 import { InsertApplication, SelectApplication } from "@/db/schema";
 import {
-  getUserApplicationsByEmail,
   deleteApplication,
   addApplication,
+  getUserApplicationsById,
 } from "@/db/queries/applications";
 import { revalidatePath } from "next/cache";
-import { toast } from "sonner";
 
 export async function addApplicationUseCase(
   values: AddApplicationFormType,
-  userEmail: string | undefined | null
+  user_id: string | undefined | null
 ) {
-  if (!userEmail) {
+  if (!user_id) {
     throw new Error("User not found");
   }
   const applicationToInsert = {
     ...values,
     appliedDate: new Date(),
-    userEmail: userEmail,
+    userId: user_id,
   };
   const updatedApplicationToInsert = applicationToInsert as InsertApplication;
   try {
@@ -31,11 +30,11 @@ export async function addApplicationUseCase(
   revalidatePath("/dashboard/applications");
 }
 
-export async function getUserApplicationsByEmailUseCase(
-  userEmail: SelectApplication["userEmail"]
+export async function getUserApplicationsByIdUseCase(
+  user_id: SelectApplication["userId"]
 ) {
   try {
-    const applications = await getUserApplicationsByEmail(userEmail);
+    const applications = await getUserApplicationsById(user_id);
     return applications;
   } catch (error) {
     console.error("Error getting applications", error);

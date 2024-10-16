@@ -1,12 +1,11 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Briefcase, MessageCircle, HelpCircle } from "lucide-react";
+import { Briefcase, MessageCircle } from "lucide-react";
 import SidebarMenu from "./sidebarMenu";
 import { useSession, signOut } from "next-auth/react";
 
 export default function Sidebar() {
-  const { data: session } = useSession();
   return (
     <div className="flex h-full flex-col gap-2">
       <div className="flex items-center border-b px-6 py-3 justify-between w-full">

@@ -5,15 +5,14 @@ import {
   SelectApplication,
   applicationsTable,
 } from "../schema";
-import { revalidatePath } from "next/cache";
 
-export async function getUserApplicationsByEmail(
-  email: SelectApplication["userEmail"]
+export async function getUserApplicationsById(
+  user_id: SelectApplication["userId"]
 ): Promise<Array<SelectApplication>> {
   return db
     .select()
     .from(applicationsTable)
-    .where(eq(applicationsTable.userEmail, email));
+    .where(eq(applicationsTable.userId, user_id));
 }
 
 export async function addApplication(data: InsertApplication) {

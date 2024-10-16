@@ -2,11 +2,18 @@ import AddApplicationDialog from "@/components/dashboard/AddApplicationDialog";
 import Applications from "@/components/dashboard/Applications";
 import { auth } from "@/../auth";
 import { Suspense } from "react";
-import { getUserApplicationsByEmailUseCase } from "@/use-cases/ApplicationUseCases";
+import { getUserApplicationsByIdUseCase } from "@/use-cases/ApplicationUseCases";
+import { ApplicationType } from "@/types/applicationType";
 
 export default async function ApplicationsPage() {
   const session = await auth();
-  const applications = await getUserApplicationsByEmailUseCase(session?.user?.email as string);
+  const applicationsFromDB = await getUserApplicationsByIdUseCase(
+    session?.user?.id as string
+  );
+
+  const applications = applicationsFromDB?.map(
+    ({ userId, ...rest }) => rest
+  ) as ApplicationType[];
   return (
     <div className="container mx-auto p-4 min-h-screen">
       <div className="flex flex-row justify-between mb-6 items-center">

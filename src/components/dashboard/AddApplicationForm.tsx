@@ -45,7 +45,7 @@ export function AddApplicationForm({ onClose }: { onClose: () => void }) {
 
   async function onSubmit(values: AddApplicationFormType) {
     setPending(true);
-    await addApplicationUseCase(values, session?.user?.email);
+    await addApplicationUseCase(values, session?.user?.id);
     form.reset();
     toast({
       variant: "success",
