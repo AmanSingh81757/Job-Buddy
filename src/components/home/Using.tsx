@@ -40,7 +40,6 @@ export default function Using() {
                 width={500}
                 height={300}
                 className="rounded-lg shadow-lg"
-                layout="responsive"
               />
             </div>
           </div>
@@ -64,7 +63,6 @@ export default function Using() {
                 width={500}
                 height={300}
                 className="rounded-lg shadow-lg"
-                layout="responsive"
               />
             </div>
           </div>
@@ -88,7 +86,6 @@ export default function Using() {
                 width={500}
                 height={300}
                 className="rounded-lg shadow-lg"
-                layout="responsive"
               />
             </div>
           </div>

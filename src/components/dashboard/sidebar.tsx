@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Briefcase, MessageCircle } from "lucide-react";
 import SidebarMenu from "./sidebarMenu";
-import { useSession, signOut } from "next-auth/react";
+import { signOut } from "next-auth/react";
 
 export default function Sidebar() {
   return (

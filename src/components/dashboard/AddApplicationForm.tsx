@@ -21,7 +21,6 @@ import {
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { addApplicationUseCase } from "@/use-cases/ApplicationUseCases";
-import { useSession } from "next-auth/react";
 import {
   AddApplicationFormSchema,
   AddApplicationFormType,
@@ -31,7 +30,6 @@ import { useToast } from "../hooks/use-toast";
 
 export function AddApplicationForm({ onClose }: { onClose: () => void }) {
   const { toast } = useToast();
-  const { data: session } = useSession();
   const [pending, setPending] = useState(false);
   const form = useForm<AddApplicationFormType>({
     resolver: zodResolver(AddApplicationFormSchema),
@@ -45,7 +43,7 @@ export function AddApplicationForm({ onClose }: { onClose: () => void }) {
 
   async function onSubmit(values: AddApplicationFormType) {
     setPending(true);
-    await addApplicationUseCase(values, session?.user?.id);
+    await addApplicationUseCase(values);
     form.reset();
     toast({
       variant: "success",

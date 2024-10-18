@@ -1,15 +1,11 @@
 import AddApplicationDialog from "@/components/dashboard/AddApplicationDialog";
 import Applications from "@/components/dashboard/Applications";
-import { auth } from "@/../auth";
 import { Suspense } from "react";
-import { getUserApplicationsByIdUseCase } from "@/use-cases/ApplicationUseCases";
+import { getUserApplicationsUseCase } from "@/use-cases/ApplicationUseCases";
 import { ApplicationType } from "@/types/applicationType";
 
 export default async function ApplicationsPage() {
-  const session = await auth();
-  const applicationsFromDB = await getUserApplicationsByIdUseCase(
-    session?.user?.id as string
-  );
+  const applicationsFromDB = await getUserApplicationsUseCase();
 
   const applications = applicationsFromDB?.map(
     ({ userId, ...rest }) => rest

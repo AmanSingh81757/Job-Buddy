@@ -8,18 +8,22 @@ import {
   getUserApplicationsById,
 } from "@/db/queries/applications";
 import { revalidatePath } from "next/cache";
+import { auth } from "@/../auth";
+import { getUserByEmail } from "@/db/queries/users";
 
-export async function addApplicationUseCase(
-  values: AddApplicationFormType,
-  user_id: string | undefined | null
-) {
-  if (!user_id) {
+export async function addApplicationUseCase(values: AddApplicationFormType) {
+  const session = await auth();
+  if (!session || !session.user?.email) {
+    throw new Error("You must be logged in to submit an application")
+  }
+  const [user] = await getUserByEmail(session.user.email);
+  if (!user) {
     throw new Error("User not found");
   }
   const applicationToInsert = {
     ...values,
     appliedDate: new Date(),
-    userId: user_id,
+    userId: user.id,
   };
   const updatedApplicationToInsert = applicationToInsert as InsertApplication;
   try {
@@ -30,11 +34,10 @@ export async function addApplicationUseCase(
   revalidatePath("/dashboard/applications");
 }
 
-export async function getUserApplicationsByIdUseCase(
-  user_id: SelectApplication["userId"]
-) {
+export async function getUserApplicationsUseCase() {
+  const session = await auth();
   try {
-    const applications = await getUserApplicationsById(user_id);
+    const applications = await getUserApplicationsById(session?.user?.id as string);
     return applications;
   } catch (error) {
     console.error("Error getting applications", error);
